@@ -18,6 +18,11 @@ article .typeSelect a {
   /* border-right: 1px solid #bbb; */
 }
 
+[data-theme='dark'] article .typeSelect a {
+  color: #fff;
+  background-color: #222;
+}
+
 article .typeSelect a:last-child {
   border-right: 0;
 }
@@ -110,6 +115,10 @@ article .gameSelect {
   gap: 20px;
 }
 
+[data-theme='dark'] article .gameSelect {
+  background-color: #222;
+}
+
 article .gameSelect .info {
   display: flex;
   justify-content: space-between;
@@ -176,6 +185,10 @@ article .gameSelect .points .point label {
   border: 1px solid #bbb;
 }
 
+[data-theme='dark'] article .gameSelect .points .point label {
+  background-color: #333;
+}
+
 article .gameSelect .points .point input:checked+label {
   font-weight: bold;
   background-color: yellow;
@@ -240,6 +253,10 @@ article .gameSelect .action {
   align-items: center;
   background-color: #fff;
   padding: 20px 0;
+}
+
+[data-theme='dark'] article .gameSelect .action {
+  background-color: #222;
 }
 
 article .gameSelect .action .buttons {
@@ -316,6 +333,10 @@ article .gameSelect .userPoint {
   padding: 20px 0;
 }
 
+[data-theme='dark'] article .gameSelect .userPoint {
+  background-color: #222;
+}
+
 article .gameSelect .userPoint .userPointTitle {
   display: flex;
   justify-content: center;
@@ -349,9 +370,18 @@ article .recentResult .game {
   border-bottom: 1px solid #eee;
 }
 
+[data-theme='dark'] article .recentResult .game {
+  border-bottom: 1px solid #999;
+}
+
 article .recentResult .game.header {
   color: #fff;
   background-color: #888;
+}
+
+[data-theme='dark'] article .recentResult .game.header {
+  color: #999;
+  background-color: #222;
 }
 
 article .recentResult .game > div {
@@ -399,6 +429,10 @@ article .statistics .header > div {
   cursor: pointer;
 }
 
+[data-theme='dark'] article .statistics .header > div {
+  background-color: #222;
+}
+
 article .statistics .header > div:first-child {
   border-right: 1px solid #bbb;
 }
@@ -407,13 +441,23 @@ article .statistics .header > div.selected {
   background-color: #fff;
 }
 
+[data-theme='dark'] article .statistics .header > div.selected {
+  color: #fff;
+  background-color: #666;
+}
+
 article .statistics .underOver,
 article .statistics .oddEven {
-  width: 660px;
+  width: 900px;
   display: none;
   overflow-x: scroll;
   background-color: #fff;
   border: 1px solid #bbb;
+}
+
+[data-theme='dark'] article .statistics .underOver,
+[data-theme='dark'] article .statistics .oddEven {
+  background-color: #222;
 }
 
 article .statistics .underOver.selected,
@@ -430,6 +474,10 @@ article .statistics .item {
   border-right: 1px solid #eee;
 }
 
+[data-theme='dark'] article .statistics .item {
+  border-right: 1px solid #333;
+}
+
 article .statistics .item .status {
   width: 100%;
   display: flex;
@@ -438,6 +486,10 @@ article .statistics .item .status {
   padding: 6px 0;
   word-break: keep-all;
   border-bottom: 1px solid #eee;
+}
+
+[data-theme='dark'] article .statistics .item .status {
+  border-bottom: 1px solid #333;
 }
 
 article .statistics .item .status.under,
@@ -459,6 +511,10 @@ article .statistics .item .charts {
 article .statistics .item .chart {
   color: #fff;
   border-bottom: 1px solid #eee;
+}
+
+[data-theme='dark'] article .statistics .item .chart {
+  border-bottom: 1px solid #333;
 }
 
 article .statistics .item .chart div {
