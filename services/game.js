@@ -9,14 +9,14 @@ const Chart = require('./chart');
 const User = require('./user');
 const pool = require('../middleware/database');
 
-const OVER_ODD = 3.1;
-const OVER_EVEN = 4.3;
-const UNDER_ODD = 4.3;
-const UNDER_EVEN = 3.1;
-const OVER = 2;
-const UNDER = 2;
-const ODD = 2;
-const EVEN = 2;
+const OVER_ODD = 3.8;
+const OVER_EVEN = 3.8;
+const UNDER_ODD = 3.8;
+const UNDER_EVEN = 3.8;
+const OVER = 1.8;
+const UNDER = 1.8;
+const ODD = 1.8;
+const EVEN = 1.8;
 
 class Game extends Class {
   async setGame (data) {
