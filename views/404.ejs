@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('./head') %>
+    <style>
+      .notFound {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: rgba(0, 0, 0, 0.2);
+        font-weight: bold;
+        font-size: 2em;
+        height: 60vh;
+      }
+      [data-theme='dark'] .notFound {
+        color: rgba(255, 255, 255, 0.3);
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('./commons') %>
+    <%- include('./header') %>
+    <main>
+      <div class="notFound">404 Not Found</div>
+    </main>
+    <%- include('./footer') %>
+  </body>
+</html>

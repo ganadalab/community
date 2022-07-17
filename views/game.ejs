@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('./head') %>
+    <!-- <meta property="og:url" content="<%= setting.siteDomain %>/game">
+    <link rel="canonical" href="<%= setting.siteDomain %>/game"> -->
+    <link rel="stylesheet" href="/stylesheets/game.css">
+  </head>
+  <body>
+    <%- include('./commons') %>
+    <%- include('./header') %>
+    <main>
+      <%- include('./aside', { mobile: false }) %>
+      <article>
+        <input type="hidden" name="gameType" id="gameType" value="<%= gameTypeTitle %>">
+        <input type="hidden" name="round">
+        <div class="typeSelect">
+          <a href="/game?gameType=1min"<% if (gameType === '1min' || gameType === undefined) { %> class="selected"<% } %>>1분 차트</a>
+          <a href="/game?gameType=3min"<% if (gameType === '3min') { %> class="selected"<% } %>>3분 차트</a>
+          <a href="/game?gameType=5min"<% if (gameType === '5min') { %> class="selected"<% } %>>5분 차트</a>
+        </div>
+        <div class="gameTypeTitle">
+          <div class="titleContainer">
+            <h1>BTC/USDT</h1>
+            <div class="type"><%= gameTypeTitle %>분</div>
+          </div>
+          <div class="comment">비트코인 선물과 미달러(BTC/USDT)의<br>가격을 기준으로 <%= gameTypeTitle %>분 단위로 진행</div>
+          <div class="timeout">남은시간 <span class="number">00:00</span></div>
+        </div>
+        <iframe src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_1000&symbol=BTCUSDTPERP&interval=<%= gameTypeTitle %>&symboledit=1&saveimage=1&toolbarbg=f1f3f6&studies=%5B%5D&theme=light&style=1&timezone=Asia/Seoul&studies_overrides=%7B%7D&overrides=%7B%7D&enabled_features=%5B%5D&disabled_features=%5B%5D&locale=kr&utm_source=www.sparkpc.abc&utm_medium=widget_new&utm_campaign=chart&utm_term=BINANCE%3ABTCUSDT" width="100%" height="530px" style="border:0px;"></iframe>
+        <section class="gameSelect">
+          <div class="info">
+            <div class="time"></div>
+            <div class="text">
+              <div class="number"></div>
+              <div>라운드 등록 중</div>
+            </div>
+          </div>
+          <div class="points">
+            <div class="point">
+              <input type="radio" name="point" id="point500" point="500">
+              <label for="point500">500</label>
+            </div>
+            <div class="point">
+              <input type="radio" name="point" id="point1000" point="1000">
+              <label for="point1000">1,000</label>
+            </div>
+            <div class="point">
+              <input type="radio" name="point" id="point5000" point="5000">
+              <label for="point5000">5,000</label>
+            </div>
+            <div class="point">
+              <input type="radio" name="point" id="point10000" point="10000">
+              <label for="point10000">10,000</label>
+            </div>
+            <div class="point">
+              <input type="radio" name="point" id="point30000" point="30000">
+              <label for="point30000">30,000</label>
+            </div>
+            <div class="point">
+              <input type="radio" name="point" id="point50000" point="50000">
+              <label for="point50000">50,000</label>
+            </div>
+          </div>
+          <div class="positions">
+            <div class="position">
+              <input type="radio" name="underOver" id="under" position="under">
+              <label for="under" class="under">언더</label>
+            </div>
+            <div class="position">
+              <input type="radio" name="underOver" id="over" position="over">
+              <label for="over" class="over">오버</label>
+            </div>
+            <div class="position">
+              <input type="radio" name="oddEven" id="odd" position="odd">
+              <label for="odd" class="odd">홀</label>
+            </div>
+            <div class="position">
+              <input type="radio" name="oddEven" id="even" position="even">
+              <label for="even" class="even">짝</label>
+            </div>
+          </div>
+          <div class="action">
+            <div class="buttons">
+              <button class="buy" type="buy">거래 신청</button>
+              <button class="reset" type="reset">초기화</button>
+            </div>
+          </div>
+          <div class="userPoint">
+            <div class="userPointTitle">보유포인트</div>
+            <% if (locals.user) { %>
+              <div class="point"><%= user.point.toLocaleString() %></div>
+            <% } else { %>
+              <div class="point">0</div>
+            <% } %>
+          </div>
+        </section>
+        <section class="recentResult">
+          <h2>최근 결과</h2>
+          <div class="games">
+            <div class="game header">
+              <div>라운드</div>
+              <div>시간</div>
+              <div>결과</div>
+              <div>수익</div>
+            </div>
+            <% results.forEach(result => { %>
+            <div class="game">
+              <div><%= result.round %></div>
+              <div><%= result.datetime %></div>
+              <% if (result.result) { %>
+                <div class="success">적중</div>
+                <div><%= result.pointCalc.toLocaleString() %></div>
+              <% } else if (result.result === null) { %>
+                <div>결과 대기중</div>
+                <div></div>
+              <% } else { %>
+                <div class="fail">미적중</div>
+                <div></div>
+              <% } %>
+            </div>
+            <% }) %>
+          </div>
+        </section>
+        <section class="statistics">
+          <h2>결과 통계</h2>
+          <div class="header">
+            <div class="selected" id="underOver">언오버</div>
+            <div id="oddEven">홀짝</div>
+          </div>
+          <div class="container">
+            <div class="underOver selected">
+              <% underOver.forEach(item => { %>
+              <div class="item">
+                <% if (item.status === 'under') { %>
+                  <div class="status under">언더</div>
+                <% } else { %>
+                  <div class="status over">오버</div>
+                <% } %>
+                <div class="charts">
+                  <% item.charts.forEach(chart => { %>
+                    <div class="chart">
+                    <% if (item.status === 'under') { %>
+                      <div class="under"><%= chart.round %></div>
+                    <% } else { %>
+                      <div class="over"><%= chart.round %></div>
+                    <% } %>
+                    </div>
+                  <% }) %>
+                  <% const remain = 10 - item.charts.length %>
+                  <% for (let i = 0; i < remain; i ++) { %>
+                    <div class="chart"></div>
+                  <% } %>
+                </div>
+              </div>
+              <% }) %>
+            </div>
+          </div>
+          <div class="container">
+            <div class="oddEven">
+              <% oddEven.forEach(item => { %>
+              <div class="item">
+                <% if (item.status === 'odd') { %>
+                  <div class="status odd">홀</div>
+                <% } else { %>
+                  <div class="status even">짝</div>
+                <% } %>
+                <div class="charts">
+                  <% item.charts.forEach(chart => { %>
+                    <div class="chart">
+                    <% if (item.status === 'odd') { %>
+                      <div class="odd"><%= chart.round %></div>
+                    <% } else { %>
+                      <div class="even"><%= chart.round %></div>
+                    <% } %>
+                    </div>
+                  <% }) %>
+                  <% const remain = 10 - item.charts.length %>
+                  <% for (let i = 0; i < remain; i ++) { %>
+                    <div class="chart"></div>
+                  <% } %>
+                </div>
+              </div>
+              <% }) %>
+            </div>
+          </div>
+        </section>
+      </article>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js" defer></script>
+      <script src="/javascripts/game.js" defer></script>
+      <%- include('./aside', { mobile: true }) %>
+    </main>
+    <%- include('./footer') %>
+  </body>
+</html>

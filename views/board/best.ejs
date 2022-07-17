@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('../head') %>
+    <meta name="description" content="<%= setting.siteDescription %>">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="인기게시물 - <%= setting.siteName %>">
+    <meta property="og:description" content="<%= setting.siteDescription %>">
+    <% if (setting.faviconImage) { %>
+    <meta property="og:image" content="<%= storage %>/assets/<%= setting.faviconImage %>">
+    <meta property="og:image:width" content="200">
+    <meta property="og:image:height" content="200">
+    <% } %>
+    <% if (url) { %>
+    <meta property="og:url" content="<%= setting.siteDomain %>/best">
+    <% } else { %>
+    <meta property="og:url" content="<%= setting.siteDomain %>/<%= url %>">
+    <% } %>
+    <link rel="stylesheet" href="/stylesheets/board/commons.css">
+    <link rel="stylesheet" href="/stylesheets/board/list.css">
+  </head>
+  <body>
+    <%- include('../commons') %>
+    <%- include('../header') %>
+    <main>
+      <%- include('../aside', { mobile: false }) %>
+      <article id="list">
+        <%- include('../banner', { position: 'articleTop' }) %>
+        <%- include('../title', { title }) %>
+        <%- include(`./type/board`, { articles }) %>
+        <%- include('../pagination') %>
+        <%- include('./searchAndWrite') %>
+        <%- include('../banner', { position: 'articleBottom' }) %>
+      </article>
+      <%- include('../aside', { mobile: true }) %>
+    </main>
+    <%- include('../footer') %>
+  </body>
+</html>

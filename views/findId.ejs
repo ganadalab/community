@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('./head') %>
+    <meta property="og:url" content="<%= setting.siteDomain %>/findId">
+    <link rel="canonical" href="<%= setting.siteDomain %>/findId">
+    <link rel="stylesheet" href="/stylesheets/authentication.css">
+  </head>
+  <body>
+    <%- include('./commons') %>
+    <%- include('./header') %>
+    <main>
+      <h1>아이디 찾기</h1>
+      <% if (locals.setting.useSMS) { %>
+      <div class="button"><a href="/findId/sms">휴대폰으로 찾기</a></div>
+      <% } %>
+      <div class="button"><a href="/findId/email">이메일로 찾기</a></div>
+    </main>
+    <%- include('./footer') %>
+  </body>
+</html>

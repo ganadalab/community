@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('./head') %>
+    <meta property="og:url" content="<%= setting.siteDomain %>/<%= page.slug %>">
+    <link rel="canonical" href="<%= setting.siteDomain %>/<%= page.slug %>">
+    <link rel="stylesheet" href="/stylesheets/page.css">
+    <link rel="stylesheet" href="/stylesheets/board/content.css">
+    <style>
+      [data-theme='dark'] article h1 {
+        color: #fff;
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+      [data-theme='dark'] article .content {
+        color: rgba(255, 255, 255, 0.7);
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+    </style>
+    <style>
+      article > .content {
+        color: <%= locals.setting.bodyFontColor %>;
+      }
+
+      article .content a {
+        color: <%= setting.pointColor %>;
+      }
+    
+      article > .content .image {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+    
+      article > .content .media {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('./commons') %>
+    <%- include('./header') %>
+    <main>
+      <%- include('./aside', { mobile: false }) %>
+      <article>
+        <%- include('./title', { title: page.title }) %>
+        <div class="content">
+          <%- page.content %>
+        </div>
+      </article>
+      <%- include('./aside', { mobile: true }) %>
+    </main>
+    <%- include('./footer') %>
+  </body>
+</html>

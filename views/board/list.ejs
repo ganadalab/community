@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title><%= pageTitle %></title>
+    <%- include('../head') %>
+    <meta name="description" content="<%= setting.siteDescription %>">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="<%= board.title %> - <%= setting.siteName %>">
+    <meta property="og:description" content="<%= setting.siteDescription %>">
+    <% if (setting.faviconImage) { %>
+    <meta property="og:image" content="<%= storage %>/assets/<%= setting.faviconImage %>">
+    <meta property="og:image:width" content="200">
+    <meta property="og:image:height" content="200">
+    <% } %>
+    <meta property="og:url" content="<%= setting.siteDomain %>/<%= board.slug %>">
+    <link rel="canonical" href="<%= setting.siteDomain %>/<%= board.slug %>">
+    <link rel="stylesheet" href="/stylesheets/board/commons.css">
+    <link rel="stylesheet" href="/stylesheets/board/list.css">
+  </head>
+  <body>
+    <%- include('../commons') %>
+    <%- include('../header') %>
+    <main>
+      <%- include('../aside', { mobile: false }) %>
+      <article id="list">
+        <%- include('../banner', { position: 'articleTop' }) %>
+        <%- include('../title', { title: board.title }) %>
+        <% if (board.categories?.length) { %>
+        <div class="categories">
+          <div class="category"><a href="?category=">전체</a></div>
+          <% board.categories.forEach(category => { %>
+            <div class="category"><a href="?category=<%= category.id %>"><%= category.title %></a></div>
+          <% }) %>
+        </div>
+        <% } %>
+        <% if (notices.length) { %>
+          <%- include(`./type/board`, { articles: notices }) %>
+        <% } %>
+        <% if (articles.length) { %>
+          <% if (board.type.match('bookmark')) { %>
+          <%- include(`./type/bookmark`, { articles: articles }) %>
+          <% } else { %>
+          <%- include(`./type/${board.type}`, { articles: articles }) %>
+          <% } %>
+        <% } %>
+        <%- include('../pagination') %>
+        <%- include('./searchAndWrite') %>
+        <%- include('../banner', { position: 'articleBottom' }) %>
+      </article>
+    </main>
+    <%- include('../footer') %>
+  </body>
+</html>
