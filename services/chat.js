@@ -1,7 +1,7 @@
 const Class = require('./class');
 const status = require('./status');
 const config = require('../middleware/config');
-const s3 = config.getS3();
+const storage = config.getStorage();
 const pool = require('../middleware/database');
 
 class Chat extends Class {
@@ -55,12 +55,12 @@ class Chat extends Class {
   setInfo (chat) {
     const permission = status.permissions.find(permission => permission.permission === chat.permission);
     if (permission.image) {
-      chat.permissionImage = `${s3.host}/permission/${permission.image}`;
+      chat.permissionImage = `${storage}/permission/${permission.image}`;
     } else {
       chat.permissionImage = `/assets/permission/${chat.permission}.svg`;
     }
     if (chat.userImage) {
-      chat.userImage = `${s3.host}/userImage/${chat.userImage}`;
+      chat.userImage = `${storage}/userImage/${chat.userImage}`;
     } else {
       chat.userImage = `/assets/userImage.svg`;
     }
