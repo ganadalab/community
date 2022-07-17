@@ -36,13 +36,13 @@ class Chart extends Class {
           if (chart) {
             const roundCheckNext = moment(dateTimeNext).format('HHmmss');
             let roundNext = chart.round + 1; 
-            roundCheckNext === '000000' ? roundNext : chart.round + 1;
+            roundCheckNext === '000000' ? roundNext = 1 : roundNext = chart.round + 1;
             const chartNext = await this.getByDateTime({ type, round: roundNext, dateTime: dateTimeNext, status: 0 });
             if (chartNext) {
               const roundCheckNextNext = moment(dateTimeNextNext).format('HHmmss');
               let roundNextNext = chart.round + 1; 
-              roundCheckNextNext === '000000' ? round : chartNext.round + 1;
-              await this.getByDateTime({ type, round: roundNextNext, dateTime: dateTimeNextNext, status: 0 });
+              roundCheckNextNext === '000000' ? roundNextNext = 1 : roundNextNext = chartNext.round + 1;
+              const chartNextNext = await this.getByDateTime({ type, round: roundNextNext, dateTime: dateTimeNextNext, status: 0 });
             }
             let underOver = null;
             let oddEven = null;
