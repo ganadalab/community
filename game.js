@@ -1,8 +1,6 @@
-const bcrypt =  require('bcrypt');
 const colors = require('colors');
 const mysql = require('mysql2/promise');
 const sql = require('./config.json').sql.production;
-const hashCreate = require('./middleware/hash');
 
 const pool = mysql.createPool({
   host: sql.host,
@@ -56,7 +54,7 @@ const game = async () => {
         game_chartOneMinute_ID int unsigned DEFAULT NULL,
         game_chartThreeMinute_ID int unsigned DEFAULT NULL,
         game_chartFiveMinute_ID int unsigned DEFAULT NULL,
-        position varchar(45) DEFAULT NULL,
+        \`position\` varchar(45) DEFAULT NULL,
         point int unsigned DEFAULT NULL,
         result tinyint unsigned DEFAULT NULL,
         status tinyint(1) DEFAULT '1',
@@ -67,7 +65,7 @@ const game = async () => {
         KEY game_chartOneMinute_ID (game_chartOneMinute_ID),
         KEY game_chartThreeMinute_ID (game_chartThreeMinute_ID),
         KEY game_chartFiveMinute_ID (game_chartFiveMinute_ID),
-        KEY position (position),
+        KEY \`position\` (\`position\`),
         CONSTRAINT game_chartFiveMinute_ID FOREIGN KEY (game_chartFiveMinute_ID) REFERENCES chartFiveMinute (id) ON DELETE CASCADE ON UPDATE CASCADE,
         CONSTRAINT game_chartOneMinute_ID FOREIGN KEY (game_chartOneMinute_ID) REFERENCES chartOneMinute (id) ON DELETE CASCADE ON UPDATE CASCADE,
         CONSTRAINT game_chartThreeMinute_ID FOREIGN KEY (game_chartThreeMinute_ID) REFERENCES chartThreeMinute (id) ON DELETE CASCADE ON UPDATE CASCADE,
