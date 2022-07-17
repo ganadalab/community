@@ -34,9 +34,15 @@ class Chart extends Class {
           this.conn = conn;
           const chart = await this.getByDateTime({ type, dateTime, dateTimeRaw: data[0], status: 0 });
           if (chart) {
-            const chartNext = await this.getByDateTime({ type, round: chart.round + 1, dateTime: dateTimeNext, status: 0 });
+            const roundCheckNext = moment(dateTimeNext).format('HHmmss');
+            let roundNext = chart.round + 1; 
+            roundCheckNext === '000000' ? roundNext : chart.round + 1;
+            const chartNext = await this.getByDateTime({ type, round: roundNext, dateTime: dateTimeNext, status: 0 });
             if (chartNext) {
-              const chartNextNext = await this.getByDateTime({ type, round: chartNext.round + 1, dateTime: dateTimeNextNext, status: 0 });
+              const roundCheckNextNext = moment(dateTimeNextNext).format('HHmmss');
+              let roundNextNext = chart.round + 1; 
+              roundCheckNextNext === '000000' ? round : chartNext.round + 1;
+              await this.getByDateTime({ type, round: roundNextNext, dateTime: dateTimeNextNext, status: 0 });
             }
             let underOver = null;
             let oddEven = null;
