@@ -52,8 +52,8 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 const binance = new Binance().options({
-  APIKEY: 'sAenFuUK88xciCY1bqGg7vfgTOcWLMZZ1gJSzGeatsamqNelIkQT3gWz8liJWxZ5',
-  APISECRET: 'ZXQqsrf9VCmtXSe5aUTWthkzzWGjtewTlBJE8OrrxRd09huVsi3oxtJW1e8mNuMN',
+  APIKEY: '4p6LicesTAH85y5vdKaQXsIJXsghKCyfVOV9CugwUouMnCCRAPjH8ejAvIrHoxGu',
+  APISECRET: '9U2czWMvW4wvPPfWV4KgWkmoFEDezZVscCfSB8RG5XRqWtPtDuCnDuxkCa8GGDvS',
 });
 
 let beforeMinute = null;
